@@ -1,0 +1,107 @@
+---
+title: "Penguins"
+subtitle: 'MSc in Statistics 2025/26, Imperial College London'
+author: "Jai Robinson"
+format:
+  html:
+    toc: true
+    highlight: tango
+    self-contained: true
+    df-print: paged
+  pdf: default
+format-links: false
+bibliography: "MSc_Statistics_coursework_template_quarto.bib" 
+---
+
+```{=html}
+<style type="text/css">
+h1{
+  font-size: 24pt;
+}
+h2{
+  font-size: 18pt;
+}
+body{
+  font-size: 12pt;
+}
+</style>
+```
+
+```{r setup, include = FALSE, tidy=TRUE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+include_solutions <- TRUE
+```
+
+```{r setup2, include=FALSE, tidy=TRUE}
+require(rmarkdown)
+require(knitr)
+require(kableExtra)
+# Put any library imports and other preamble here.
+```
+
+# Plots
+
+Initial look at time against weight
+
+```{r, echo=FALSE}
+plot(x= ChickWeight$Diet,
+     y= ChickWeight$weight)
+```
+# Age vs weight
+
+```{r}
+#| echo: false
+par(mfrow = c(2, 2))
+for (i in unique(ChickWeight$Diet)){
+    plot(
+    x = ChickWeight[ChickWeight$Diet==i, "Time"],
+    y = ChickWeight[ChickWeight$Diet==i, "weight"],
+    col = i,
+    pch = 15 + as.numeric(i),
+    xlab = "Age (days)",
+    ylab = "Weight",
+    sub = paste("Diet: ", i)
+  )
+}
+```
+
+
+
+# Tables
+
+How many chicks were on each diet?
+@casella2024statistical
+@rfcapital
+
+```{r}
+
+diet_counts <- table(ChickWeight$Diet)
+knitr::kable(diet_counts, col.names = c("Diet", "Count"))
+
+```
+We will the mean and s.d. of each diet
+
+```{r}
+
+
+
+```
+
+
+
+# Code appendix
+
+Rather than re-paste all the code to the appendix, here is a trick which makes the markdown file output all the code (without) execution in the appendix, without any duplication.
+
+Please keep in mind to format the code so that the entire code is clearly visible and does not run into the margins of the pdf version.
+
+```{r ref.label=knitr::all_labels(), echo = T, eval = F}
+```
+
+# References
+:::refs
+:::
+
